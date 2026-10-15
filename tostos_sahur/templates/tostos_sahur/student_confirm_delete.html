@@ -1,0 +1,24 @@
+{% extends "tostos_sahur/base.html" %}
+{% block title %}Remove Student | StudentTrack{% endblock %}
+{% block content %}
+<section class="card delete-confirmation" aria-labelledby="delete-title">
+  <div class="delete-heading">
+    <span class="delete-icon" aria-hidden="true">!</span>
+    <div>
+      <p class="eyebrow">Permanent action</p>
+      <h2 id="delete-title">Remove student?</h2>
+    </div>
+  </div>
+  <p class="subtitle">This will permanently remove the student record. This action cannot be undone.</p>
+  <div class="delete-warning">
+    You are about to remove:
+    <strong class="delete-student">{{ student.last_name }}, {{ student.first_name }}</strong>
+    <span class="delete-student-id">Student ID: {{ student.student_id }}</span>
+  </div>
+  <form method="post" class="form-actions">
+    {% csrf_token %}
+    <button class="button danger" type="submit">Yes, remove student</button>
+    <a class="button muted" href="{% url 'student_list' %}">Cancel and return to directory</a>
+  </form>
+</section>
+{% endblock %}

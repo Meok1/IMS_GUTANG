@@ -1,0 +1,23 @@
+{% extends "tostos_sahur/base.html" %}
+{% block title %}Create account | StudentTrack{% endblock %}
+{% block content %}
+<section class="card auth-card" aria-labelledby="signup-title">
+  <p class="eyebrow">Student records access</p>
+  <h2 id="signup-title">Create an account</h2>
+  <p class="subtitle">Register to access the student directory.</p>
+  <form method="post">
+    {% csrf_token %}
+    {% if form.non_field_errors %}<div class="form-error" role="alert">{{ form.non_field_errors }}</div>{% endif %}
+    {% for field in form %}
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+      {% if field.help_text %}<div class="subtitle">{{ field.help_text|safe }}</div>{% endif %}
+      {% if field.errors %}<div class="form-error" role="alert">{{ field.errors }}</div>{% endif %}
+    {% endfor %}
+    <div class="form-actions">
+      <button class="button" type="submit">Create account</button>
+    </div>
+  </form>
+  <a class="account-link" href="{% url 'login' %}">Already have an account? Log in</a>
+</section>
+{% endblock %}

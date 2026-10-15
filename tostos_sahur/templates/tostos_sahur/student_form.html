@@ -1,0 +1,16 @@
+{% extends "tostos_sahur/base.html" %}
+{% block title %}{{ title }} | StudentTrack{% endblock %}
+{% block content %}
+<div class="card"><div class="topbar"><div><p class="eyebrow">Directory / Profile</p><h2>{{ title }}</h2><p class="subtitle">Keep each student record complete and current.</p></div><a class="button muted" href="{% url 'student_list' %}">← Back to records</a></div>
+<form method="post">{% csrf_token %}<div class="grid">
+  <div><label>Student ID</label><input required name="student_id" value="{{ student.student_id|default:'' }}"></div>
+  <div><label>First Name</label><input required name="first_name" value="{{ student.first_name|default:'' }}"></div>
+  <div><label>Last Name</label><input required name="last_name" value="{{ student.last_name|default:'' }}"></div>
+  <div><label>Age</label><input required type="number" min="1" name="age" value="{{ student.age|default:'' }}"></div>
+  <div><label>Gender</label><select required name="gender"><option value="">Select gender</option><option value="Male" {% if student.gender == 'Male' %}selected{% endif %}>Male</option><option value="Female" {% if student.gender == 'Female' %}selected{% endif %}>Female</option><option value="Prefer not to say" {% if student.gender == 'Prefer not to say' %}selected{% endif %}>Prefer not to say</option></select></div>
+  <div><label>Course</label><input required name="course" value="{{ student.course|default:'' }}"></div>
+  <div><label>Year Level</label><input required name="year_level" value="{{ student.year_level|default:'' }}"></div>
+  <div><label>Email</label><input required type="email" name="email" value="{{ student.email|default:'' }}"></div>
+  <div><label>Contact Number</label><input required name="contact_number" value="{{ student.contact_number|default:'' }}"></div>
+</div><div class="form-actions"><button class="button" type="submit">Save student</button><a class="button muted" href="{% url 'student_list' %}">Cancel</a></div></form></div>
+{% endblock %}
